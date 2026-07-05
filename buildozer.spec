@@ -8,16 +8,18 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,html,js,css
 
 version = 0.1
-# ★★★ 关键修改：指定兼容的 Kivy 和 pyjnius 版本 ★★★
 requirements = python3,kivy==2.2.1,pyjnius==1.5.0,pywebview==4.2.2,proxy-tools,typing_extensions
 
 android.permissions = INTERNET
 android.api = 30
 android.minapi = 21
-android.ndk = 25c
+android.ndk = 23b          # 降级，避免 libffi 编译问题
 android.archs = arm64-v8a, armeabi-v7a
 fullscreen = 0
 log_level = 2
 android.accept_sdk_license = True
 android.gradle_dependencies = 'com.android.support:support-v4:28.0.0'
 android.python_version = 3.11
+
+# 指定 p4a 分支（可选）
+p4a.branch = develop
