@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-20.04
     timeout-minutes: 180
 
     steps:
@@ -27,18 +27,6 @@ jobs:
           libncurses5-dev libncursesw5-dev cmake \
           libffi-dev libssl-dev
 
-    - name: Install autoconf 2.69 (for NDK compatibility)
-      run: |
-        sudo apt remove -y autoconf
-        wget https://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz
-        tar xzf autoconf-2.69.tar.gz
-        cd autoconf-2.69
-        ./configure --prefix=/usr
-        make
-        sudo make install
-        cd ..
-        autoconf --version
-
     - name: Install Buildozer and Cython
       run: |
         pip3 install --upgrade pip
@@ -50,13 +38,6 @@ jobs:
         path: ~/.buildozer
         key: buildozer-global-${{ hashFiles('buildozer.spec') }}
 
-    - name: Build APK
+    - name: Build APK (with retry)
       run: |
-        export PATH=/usr/bin:$PATH
         yes | buildozer -v android debug
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: tv-player-apk
-        path: bin/*.apk
