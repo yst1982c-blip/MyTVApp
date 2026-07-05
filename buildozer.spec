@@ -11,10 +11,9 @@ version = 0.1
 requirements = python3,kivy,pywebview,proxy-tools,typing_extensions
 
 android.permissions = INTERNET
-android.api = 30
+android.api = 28              # 降低 API 级别
 android.minapi = 21
-# ★★★ 关键修改：使用 NDK 23b 避免 libffi 编译错误 ★★★
-android.ndk = 23b
+android.ndk = 19c             # 使用更稳定的 NDK
 android.archs = arm64-v8a, armeabi-v7a
 fullscreen = 0
 log_level = 2
