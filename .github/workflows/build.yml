@@ -3,8 +3,6 @@ name: Build Android APK
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -21,7 +19,7 @@ jobs:
       with:
         python-version: '3.11'
 
-    - name: Install system dependencies
+    - name: Install dependencies
       run: |
         sudo apt update
         sudo apt install -y git zip unzip openjdk-17-jdk \
@@ -29,24 +27,22 @@ jobs:
           libncurses5-dev libncursesw5-dev cmake \
           libffi-dev libssl-dev
 
-    - name: Install Buildozer and Cython
+    - name: Install Buildozer
       run: |
         pip3 install --upgrade pip
         pip3 install buildozer cython
 
-    - name: Cache Buildozer global
+    - name: Cache Buildozer
       uses: actions/cache@v3
       with:
         path: ~/.buildozer
         key: buildozer-global-${{ hashFiles('buildozer.spec') }}
-        restore-keys: |
-          buildozer-global-
 
     - name: Build APK
       run: |
         yes | buildozer -v android debug
 
-    - name: Upload APK artifact
+    - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: tv-player-apk
