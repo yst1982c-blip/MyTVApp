@@ -11,9 +11,9 @@ version = 0.1
 requirements = python3,kivy,pywebview,proxy-tools,typing_extensions
 
 android.permissions = INTERNET
-android.api = 30
+android.api = 21
 android.minapi = 21
-android.ndk = 28c
+android.ndk = 19c
 android.archs = arm64-v8a, armeabi-v7a
 fullscreen = 0
 log_level = 2
