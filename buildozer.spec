@@ -8,7 +8,8 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,html,js,css
 
 version = 0.1
-requirements = python3,kivy,pywebview,proxy-tools,typing_extensions
+# ★★★ 关键修改：指定兼容的 Kivy 和 pyjnius 版本 ★★★
+requirements = python3,kivy==2.2.1,pyjnius==1.5.0,pywebview==4.2.2,proxy-tools,typing_extensions
 
 android.permissions = INTERNET
 android.api = 30
